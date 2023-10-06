@@ -1,5 +1,7 @@
-import {StyleSheet, View, Text, Image } from 'react-native'
+import {StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { TextInput } from 'react-native-paper'
+
 
 
 
@@ -23,7 +25,7 @@ export default function App(){
                
            </View>
             <View style = {styles.view_evaluate}>
-                <Text>Cực kỳ hài lòng</Text>
+                <Text style= {{fontSize:18, fontWeight:"bold"}}>Cực kỳ hài lòng</Text>
                 <View style ={styles.view_star}>
                     <Image
                         style = {styles.image_star}
@@ -50,12 +52,39 @@ export default function App(){
                         source={require('../assets/star.jpg')}
                     >
                     </Image>
-                    
-
                 </View>
-                
-            </View>
+                <View style = {styles.view_addImage}>
+                    <TextInput
+                       
+                        left ={
+                            <TextInput.Icon
+                            color="black"
+                            icon="camera"
+                            size="30px"
+                            style = {{margin:"10px"}}
+                            />
+                        }
+                        style = {styles.text_addImage}
+                        placeholder='Thêm hình ảnh'
+                    >
 
+
+                    </TextInput>
+                </View>
+                <View style = {styles.view_textArea}>
+                    <TextInput
+                        multiline ={true}
+                        numberOfLines={7}
+                        placeholder='Hãy chia sẻ những điều mà bạn thích về sản phẩm'
+                        style = {styles.text_area}
+                    />
+                </View>
+            </View>
+            <View style = {{flex:1, alignItems: "center", marginBottom:"20px", justifyContent: "flex-end"}}>
+                <TouchableOpacity style= {{width:300, height:40, borderRadius: "5px", backgroundColor: "#0D5DB6"}}>
+                    <Text style = {{color:"#fff", fontSize: "20px", fontWeight: "bold", alignItems:"center", textAlign:"center", margin:"auto"}}>Gửi</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -79,14 +108,25 @@ const styles = StyleSheet.create({
 
     },
     view_evaluate:{
-        flex:5,
+        flex:3,
         alignItems:"center",
-        justifyContent:"center"
+        justifyContent:"center",
+       flexDirection:"column",
+       
+        
 
     },
     view_star:{
-        flex:1,
+        marginVertical: 8,
         flexDirection:"row",
+       
+    },
+    view_addImage:{
+        marginVertical: 8,
+
+    },
+    view_textArea:{
+        marginVertical: 8,
     },
     image_usb:{
         height:100,
@@ -102,7 +142,18 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
     },
     image_star:{
-        height:25,
-        width:25,
-    },  
+        height:40,
+        width:40,
+        margin:8
+    },
+    text_addImage:{
+        margin:10,
+        border: "2px solid blue",
+        width:300
+        
+    },
+    text_area:{
+        height:210,
+        width:300
+    }
 })

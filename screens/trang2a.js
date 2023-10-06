@@ -2,33 +2,44 @@ import { StatusBar } from "expo-status-bar";
 import {StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-paper";
 // import { Entypo ,FontAwesome} from "@expo/vector-icons";
-import React from "react";
-const App = () =>{
-  const [users, setUsers] = React.useState([
-    {
-      username: "vanphu",
-      password: "123"
-    },
-    {
-      username:"vanquy",
-      password: "123"
+import React ,{ useState} from "react";
+import { useNavigation } from "@react-navigation/native";
 
-    }
-  ]);
 
-  const handleLogin = ()=>{
-    const userFound = users.find((user)=>{
-      return user.username === this.state.username && user.password === this.state.password
+export default function trang2a() {
+  const navigation = useNavigation();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () =>{
+    const userFound  = users.find((user)=>{
+      return user.username === username && user.password === password;
     });
     if(userFound){
       console.log(username);
       console.log(password);
+      window.alert("đăng nhập thành công");
+      navigation.navigate("screen2")
     }
+    else{
+      console.log("bị sai"+username);
+      console.log("bị sai"+password);
+      window.alert("sai username hoặc password")
+    }
+  };
+  const handleForget = ()=>{
+    navigation.navigate("screen3")
   }
-}
-
-
-export default function App() {
+  const users = [
+    {
+      username : "van phu",
+      password :"123"
+    },
+    {
+      username: "vanquy",
+      password :"123"
+    }
+  ]
   return (
 
     <View style={styles.container}>
@@ -41,6 +52,8 @@ export default function App() {
         <TextInput style={styles.input} placeholder="Name"
           activeUnderlineColor="none"
           underlineColor="none"
+          value={username}
+          onChangeText={(text) => setUsername(text)}
         left ={
             <TextInput.Icon
             color="black"
@@ -55,6 +68,8 @@ export default function App() {
         secureTextEntry={true}
         activeUnderlineColor="none"
         underlineColor="none"
+        value={password}
+        onChangeText={(text) => setPassword(text)}
         left = {
             <TextInput.Icon
             color="black"
@@ -79,7 +94,7 @@ export default function App() {
         
       </View>
        <View style={styles.view_textPrivate}>
-            <Text style={styles.p_text}>Forgot your password</Text>
+            <Text style={styles.p_text } onPress={handleForget}>Forgot your password</Text>
        </View>
     </View>
 
